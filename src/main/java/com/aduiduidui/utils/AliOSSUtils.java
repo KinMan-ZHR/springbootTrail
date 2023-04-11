@@ -13,10 +13,10 @@ import java.util.UUID;
 @Component
 public class AliOSSUtils {
 
-    private String endpoint = "https://oss-cn-hangzhou.aliyuncs.com";
-    private String accessKeyId = "LTAI4GCH1vX6DKqJWxd6nEuW";
-    private String accessKeySecret = "yBshYweHOpqDuhCArrVHwIiBKpyqSL";
-    private String bucketName = "web-tlias";
+    private final String endpoint = "https://oss-cn-hangzhou.aliyuncs.com";
+    private final String accessKeyId = "LTAI4GCH1vX6DKqJWxd6nEuW";
+    private final String accessKeySecret = "yBshYweHOpqDuhCArrVHwIiBKpyqSL";
+    private final String bucketName = "web-tlias";
 
     /**
      * 实现上传图片到OSS
@@ -27,6 +27,8 @@ public class AliOSSUtils {
 
         // 避免文件覆盖
         String originalFilename = file.getOriginalFilename();
+        // 生成新的文件名(uuid+ 原始文件名后缀)
+        assert originalFilename != null;
         String fileName = UUID.randomUUID().toString() + originalFilename.substring(originalFilename.lastIndexOf("."));
 
         //上传文件到 OSS

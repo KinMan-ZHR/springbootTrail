@@ -35,13 +35,13 @@ public class EmpController {
 
     /**
      * 新版分页查询(使用了分页插件)允许条件动态sql
-     * @param page
-     * @param pageSize
-     * @param name
-     * @param gender
-     * @param begin
-     * @param end
-     * @return
+     * @param page  当前页
+     * @param pageSize  每页显示的条数
+     * @param name 员工姓名
+     * @param gender 员工性别
+     * @param begin 入职时间
+     * @param end 入职时间
+     * @return 分页查询的数据
      */
     @GetMapping
     public Result pageIf(@RequestParam(defaultValue = "1") Integer page,
@@ -65,8 +65,8 @@ public class EmpController {
     }
     /**
      * 新增员工
-     * @param emp
-     * @return
+     * @param emp 员工信息
+     * @return 新增结果
      */
     @PostMapping
     public Result addEmp(@RequestBody Emp emp){
