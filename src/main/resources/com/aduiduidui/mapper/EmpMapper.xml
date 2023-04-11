@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--定义约束以及文件类型-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--得用源路径，记得把java后缀删掉且必须把/改为.-->
+<mapper namespace="com.aduiduidui.mapper.EmpMapper">
+    <!--    条件查询-->
+    <select id="list" resultType="com.aduiduidui.pojo.Emp">
+        select * from emp
+        <where>
+            <!--            因为name是string类型,不传入东西的时候默认值是空字符串-->
+            <if test="name != null and name != ''">name like concat('%',#{name},'%')</if>
+            <if test="gender != null">and gender=#{gender}</if>
+            <if test="begin != null">
+                and entryDate between #{begin} and #{end}
+            </if>
+        </where>
+
+        order by update_time desc
+    </select>
+    <!--    批量删除员工-->
+    <delete id="deleteBat">
+        delete from emp
+        where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -114,4 +114,20 @@ public class Emp {
     this.updateTime = updateTime;
   }
 
+  @Override
+  public String toString() {
+    return "Emp{" +
+            "id=" + id +
+            ", username='" + username + '\'' +
+            ", password='" + password + '\'' +
+            ", name='" + name + '\'' +
+            ", gender=" + gender +
+            ", image='" + image + '\'' +
+            ", job=" + job +
+            ", entrydate=" + entrydate +
+            ", deptId=" + deptId +
+            ", createTime=" + createTime +
+            ", updateTime=" + updateTime +
+            '}';
+  }
 }
