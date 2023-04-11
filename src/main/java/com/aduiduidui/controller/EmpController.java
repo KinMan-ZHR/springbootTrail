@@ -75,6 +75,11 @@ public class EmpController {
         return Result.success();
     }
 
+    /**
+     * 根据id查询员工信息
+     * @param id 员工id
+     * @return 员工信息
+     */
     @GetMapping("/{id}")
     public Result getById(@PathVariable Integer id){
         log.info("根据ID查询员工信息, id: {}",id);
