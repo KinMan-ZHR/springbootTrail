@@ -1,10 +1,7 @@
 package com.aduiduidui.mapper;
 
 import com.aduiduidui.pojo.Emp;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -21,16 +18,17 @@ public interface EmpMapper {
   * @param start 开始记录数
   * @param rows 每页显示的记录数
   * @return 员工集合
+  * 使用mybatis的分页插件, 将上面select语句改为@Select("select * from emp")
+  * 本体是员工集合，但是在PageBean中，我们需要的是总记录数和员工集合
    */
     @Select("select * from emp limit #{rows} offset #{start}")
     List<Emp> findByPage(@Param("start") int start, @Param("rows") int rows);
 
-    /**
-     * 使用mybatis的分页插件
-     * 本体是员工集合，但是在PageBean中，我们需要的是总记录数和员工集合
+    /*
+     *
      * @return 员工集合
      */
-    //@Select("select * from emp")
+
 
     /**
      * 动态sql处理，推荐使用xml映射配置文件
@@ -64,9 +62,16 @@ public interface EmpMapper {
     void update(Emp emp);
     /**
      * 根据用户名和密码查询员工
-     * @param emp
-     * @return
+     * @param emp 员工对象
+     * @return 员工对象
      */
     @Select("select * from emp where username = #{username} and password = #{password}")
     Emp getByUsernameAndPassword(Emp emp);
+    /**
+     * 根据部门ID删除该部门下的员工数据
+     * @param deptId 部门ID
+     */
+    @Delete("delete  from emp where dept_id = #{deptId}")
+    void deleteByDeptId(Integer deptId);
+
 }

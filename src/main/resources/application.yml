@@ -16,10 +16,14 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
 
-#阿里云OSS,要使用阿里云OSS，需要在阿里云OSS中创建一个bucket，然后在这里配置
+#阿里云OSS,要使用阿里云OSS，需要在阿里云OSS中创建一个bucket，然后在这里配置，不用想了，这里是假的
 aliyun:
   oss:
     endpoint: https://oss-cn-hangzhou.aliyuncs.com
     accessKeyId: LTAI4GCH1vX6DKqJWxd6nEuW
     accessKeySecret: yBshYweHOpqDuhCArrVHwIiBKpyqSL
     bucketName: web-tlias
+#spring事务管理日志
+logging:
+  level:
+    org.springframework.jdbc.support.JdbcTransactionManager: debug

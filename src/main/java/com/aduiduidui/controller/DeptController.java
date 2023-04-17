@@ -3,6 +3,7 @@ package com.aduiduidui.controller;
 import com.aduiduidui.pojo.Dept;
 import com.aduiduidui.pojo.Result;
 import com.aduiduidui.service.DeptService;
+import com.aduiduidui.service.EmpService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,6 @@ public class DeptController {
     //面向接口编程
     @Autowired
     private DeptService deptService;
-
     //无法自动装配。找不到 'DeptService' 类型的 Bean。请检查配置类。
     //private static Logger logger = Logger.getLogger("DeptController");
     //Restful风格的URL
@@ -31,6 +31,13 @@ public class DeptController {
         return Result.success(deptList);
     }
       //路径变量 需要增加@PathVariable来接收
+    //由于两个表的关系，所以删除某一个部门底下的所有的员工也应删除
+    //要保证事务的一致性，所以要在service层进行处理
+    /**
+     * 删除部门
+     * @param id 部门id
+     * @return Result
+     */
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id) {
 
