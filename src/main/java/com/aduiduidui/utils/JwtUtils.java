@@ -7,9 +7,9 @@ import java.util.Date;
 import java.util.Map;
 
 public class JwtUtils {
-
+    //signKey是一个密钥，用来加密和解密的，可以随便写，但是一定要记住,一般都是写在配置文件中
     private static String signKey = "itheima";
-    private static Long expire = 43200000L;
+    private static Long expire = 43200000L;//过期时间，毫秒43200000L相当于12小时,L表示long类型
 
     /**
      * 生成JWT令牌

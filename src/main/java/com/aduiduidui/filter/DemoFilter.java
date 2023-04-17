@@ -6,7 +6,7 @@ import jakarta.servlet.annotation.WebFilter;
 
 import java.io.IOException;
 
-@WebFilter(urlPatterns = "/*") //拦截所有请求，拦截该路径下的所有资源,如此相应的servlet也会被拦截
+//@WebFilter(urlPatterns = "/*") //拦截所有请求，拦截该路径下的所有资源,如此相应的servlet也会被拦截
 //需要在启动类上添加注解 @ServletComponentScan，才能扫描到该过滤器，因为该注解是用来扫描servlet和filter的，而springboot默认是不扫描的
 //如果不想使用注解，可以在启动类中添加如下代码
 //public class SpringbootDemoApplication {
