@@ -38,7 +38,7 @@ public interface EmpMapper {
      * @param end      入职时间
      * @return 员工集合
      */
-    List<Emp> list(String name, Integer gender, LocalDate begin, LocalDate end);
+    List<Emp> list(String name, Short gender, LocalDate begin, LocalDate end);
 
     /**
      * 批量删除，使用动态sql配置语句

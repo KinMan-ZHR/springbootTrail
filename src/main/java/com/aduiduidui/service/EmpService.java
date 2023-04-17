@@ -16,7 +16,7 @@ public interface EmpService {
     /**
      * 使用mybatis的分页插件
      */
-    PageBean findByPage2(Integer page, Integer rows, String name, Integer gender, LocalDate begin, LocalDate end);
+    PageBean findByPage2(Integer page, Integer rows, String name, Short gender, LocalDate begin, LocalDate end);
 
     void deleteBat(List<Integer> ids);
 

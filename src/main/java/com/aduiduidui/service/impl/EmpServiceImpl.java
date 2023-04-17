@@ -41,7 +41,7 @@ private EmpMapper empMapper;
      * 使用mybatis的分页插件
      */
     @Override
-    public PageBean findByPage2(Integer page, Integer rows, String name, Integer gender, LocalDate begin, LocalDate end)
+    public PageBean findByPage2(Integer page, Integer rows, String name, Short gender, LocalDate begin, LocalDate end)
     {
 
         //1.设置分页参数
@@ -57,7 +57,7 @@ private EmpMapper empMapper;
     }
 
     /**
-     * @param ids
+     * @param ids 员工id集合
      */
     @Override
     public void deleteBat(List<Integer> ids) {
@@ -71,8 +71,9 @@ private EmpMapper empMapper;
      */
     @Override
     public void addEmp(Emp emp) {
-        emp.setCreateTime(Timestamp.valueOf(LocalDateTime.now()));
-        emp.setUpdateTime(Timestamp.valueOf(LocalDateTime.now()));
+        //设置创建时间和修改时间,补充emp的信息
+        emp.setCreateTime(LocalDateTime.now());
+        emp.setUpdateTime(LocalDateTime.now());
         empMapper.addEmp(emp);
     }
 
@@ -94,15 +95,15 @@ private EmpMapper empMapper;
      */
     @Override
     public void update(Emp emp) {
-        emp.setUpdateTime(Timestamp.valueOf(LocalDateTime.now()));
+        emp.setUpdateTime(LocalDateTime.now());
         empMapper.update(emp);
     }
 
     /**
      * 员工登录
      *
-     * @param emp
-     * @return
+     * @param emp 员工对象
+     * @return 员工对象
      */
     @Override
     public Emp login(Emp emp) {

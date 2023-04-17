@@ -1,5 +1,6 @@
 package com.aduiduidui.controller;
 
+import com.aduiduidui.annotation.Log;
 import com.aduiduidui.pojo.Dept;
 import com.aduiduidui.pojo.Result;
 import com.aduiduidui.service.DeptService;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Slf4j //lombok的注解，自动创建日志对象
+@Slf4j //lombok的注解，自动创建日志对象log 替代private static Logger logger = Logger.getLogger("DeptController");
 @RestController//相当于@ResponseBody ＋ @Controller合在一起的作用
 @RequestMapping("/depts")//类级别的RequestMapping,api接口为/depts
 //一个完整的URL为：类级别的RequestMapping+方法级别的RequestMapping
@@ -18,11 +19,12 @@ public class DeptController {
     //面向接口编程
     @Autowired
     private DeptService deptService;
-    //无法自动装配。找不到 'DeptService' 类型的 Bean。请检查配置类。
-    //private static Logger logger = Logger.getLogger("DeptController");
-    //Restful风格的URL
-    //RequestMapping
     //@RequestMapping(value = "/depts",method = GET)
+
+    /**
+     * 查询全部部门
+     * @return Result
+     */
     @GetMapping//简化版的RequestMapping;只能处理get请求
     public Result depts() {
         log.info("查询全部部门数据");
@@ -38,6 +40,7 @@ public class DeptController {
      * @param id 部门id
      * @return Result
      */
+    @Log
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id) {
 
@@ -52,6 +55,7 @@ public class DeptController {
      * @param dept 部门对象
      * @return Result
      */
+    @Log
     @PostMapping
     public Result add(@RequestBody Dept dept) {
         log.info("添加部门数据:{}",dept);//{}的意思是占位符，后面的dept会替换掉占位符。
@@ -74,6 +78,7 @@ public class DeptController {
      * @param dept 部门对象
      * @return Result
      */
+    @Log
     @PutMapping
     public Result update(@RequestBody Dept dept) {
         log.info("修改部门数据:{}",dept);//占位符

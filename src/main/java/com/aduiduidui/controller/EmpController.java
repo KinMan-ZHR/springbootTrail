@@ -1,5 +1,6 @@
 package com.aduiduidui.controller;
 
+import com.aduiduidui.annotation.Log;
 import com.aduiduidui.pojo.Emp;
 import com.aduiduidui.pojo.PageBean;
 import com.aduiduidui.pojo.Result;
@@ -19,7 +20,7 @@ public class EmpController {
     @Autowired
     private EmpService empService;
     /**
-     * 分页查询实现
+     * 分页查询实现,前端未提供请求路径，/page所以无法访问
      */
     @GetMapping("/page")
     public Result pageIf(@RequestParam(defaultValue = "1") Integer page,
@@ -43,10 +44,10 @@ public class EmpController {
      * @param end 入职时间
      * @return 分页查询的数据
      */
-    @GetMapping
+    @GetMapping()
     public Result pageIf(@RequestParam(defaultValue = "1") Integer page,
                          @RequestParam(defaultValue = "10") Integer pageSize,
-                         String name, Integer gender,
+                         String name, Short gender,
                          @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate begin,
                          @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate end) {
         // 1.接收前端传递的参数,前端传递的参数是page和pageSize，这里接收的参数名要和前端传递的参数名一致
@@ -57,6 +58,12 @@ public class EmpController {
         return Result.success(pageBean);
 
     }
+    /**
+     * 批量删除员工信息
+     * @param ids 员工id
+     * @return 删除结果
+     */
+    @Log
     @DeleteMapping("/{ids}")
     public Result deleteBat(@PathVariable List<Integer> ids){
         log.info("批量删除员工信息{}",ids);
@@ -68,6 +75,7 @@ public class EmpController {
      * @param emp 员工信息
      * @return 新增结果
      */
+    @Log
     @PostMapping
     public Result addEmp(@RequestBody Emp emp){
         log.info("新增员工{}",emp);
@@ -86,7 +94,12 @@ public class EmpController {
         Emp emp = empService.getById(id);
         return Result.success(emp);
     }
-
+    /**
+     * 更新员工信息
+     * @param emp 员工信息
+     * @return 更新结果
+     */
+    @Log
     @PutMapping
     public Result update(@RequestBody Emp emp){
         log.info("更新员工信息 : {}", emp);
