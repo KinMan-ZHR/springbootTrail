@@ -2,6 +2,7 @@ package com.aduiduidui.utils;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
@@ -13,15 +14,22 @@ import java.util.UUID;
 @Component
 public class AliOSSUtils {
 
-    private final String endpoint = "https://oss-cn-hangzhou.aliyuncs.com";
-    private final String accessKeyId = "LTAI4GCH1vX6DKqJWxd6nEuW";
-    private final String accessKeySecret = "yBshYweHOpqDuhCArrVHwIiBKpyqSL";
-    private final String bucketName = "web-tlias";
-
+//    private final String endpoint = "https://oss-cn-hangzhou.aliyuncs.com";
+//    private final String accessKeyId = "LTAI4GCH1vX6DKqJWxd6nEuW";
+//    private final String accessKeySecret = "yBshYweHOpqDuhCArrVHwIiBKpyqSL";
+//    private final String bucketName = "web-tlias";
+@Autowired
+private AliOSSProperties aliOSSProperties;
     /**
      * 实现上传图片到OSS
      */
     public String upload(MultipartFile file) throws IOException {
+        //获取阿里云OSS参数
+        String endpoint = aliOSSProperties.getEndpoint();
+        String accessKeyId = aliOSSProperties.getAccessKeyId();
+        String accessKeySecret = aliOSSProperties.getAccessKeySecret();
+        String bucketName = aliOSSProperties.getBucketName();
+
         // 获取上传的文件的输入流
         InputStream inputStream = file.getInputStream();
 

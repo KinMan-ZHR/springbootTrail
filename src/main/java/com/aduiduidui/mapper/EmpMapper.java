@@ -34,11 +34,11 @@ public interface EmpMapper {
 
     /**
      * 动态sql处理，推荐使用xml映射配置文件
-     * @param name
-     * @param gender
-     * @param begin
-     * @param end
-     * @return
+     * @param name 员工姓名
+     * @param gender 员工性别
+     * @param begin     入职时间
+     * @param end      入职时间
+     * @return 员工集合
      */
     List<Emp> list(String name, Integer gender, LocalDate begin, LocalDate end);
 
@@ -62,4 +62,11 @@ public interface EmpMapper {
      * @param emp 员工对象
      */
     void update(Emp emp);
+    /**
+     * 根据用户名和密码查询员工
+     * @param emp
+     * @return
+     */
+    @Select("select * from emp where username = #{username} and password = #{password}")
+    Emp getByUsernameAndPassword(Emp emp);
 }

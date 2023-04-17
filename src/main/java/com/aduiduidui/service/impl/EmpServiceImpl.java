@@ -97,4 +97,16 @@ private EmpMapper empMapper;
         emp.setUpdateTime(Timestamp.valueOf(LocalDateTime.now()));
         empMapper.update(emp);
     }
+
+    /**
+     * 员工登录
+     *
+     * @param emp
+     * @return
+     */
+    @Override
+    public Emp login(Emp emp) {
+        return empMapper.getByUsernameAndPassword(emp);
+
+    }
 }
